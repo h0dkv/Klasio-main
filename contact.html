@@ -1,0 +1,86 @@
+<!DOCTYPE html>
+<html lang="bg">
+
+<head>
+    <meta charset="utf-8">
+    <meta name="viewport" content="width=device-width,initial-scale=1">
+    <title>Контакт — Klasio</title>
+    <link href="https://fonts.googleapis.com/css2?family=Inter:wght@300;400;600;700&display=swap" rel="stylesheet">
+    <link rel="stylesheet" href="css/style.css">
+    <style>
+        .contact-wrap {
+            max-width: 900px;
+            margin: 40px auto;
+            padding: 20px
+        }
+
+        .contact-form label {
+            display: block;
+            margin-top: 8px
+        }
+
+        .contact-form input,
+        .contact-form textarea {
+            width: 100%;
+            padding: 10px;
+            border-radius: 8px;
+            border: 1px solid #e6e9ee;
+            margin-top: 6px
+        }
+
+        .contact-form textarea {
+            min-height: 140px
+        }
+    </style>
+</head>
+
+<body>
+    <nav class="navbar">
+        <div class="nav-inner">
+            <div class="logo">Klasio</div>
+            <div class="nav-links">
+                <ul>
+                    <li><a href="index.html">Начало</a></li>
+                    <li><a href="features.html">Функции</a></li>
+                    <li><a href="about.html">За платформата</a></li>
+                    <li><a href="contact.html">Контакт</a></li>
+                </ul>
+            </div>
+            <div class="nav-actions"><a class="btn" href="auth.html">Вход</a></div>
+        </div>
+    </nav>
+
+    <main>
+        <div class="contact-wrap">
+            <h1>Свържете се с нас</h1>
+            <p>Имаш въпрос или предложение? Попълни формата по-долу и ще се свържем с теб.</p>
+
+            <form class="contact-form" id="contact-form">
+                <label for="name">Име</label>
+                <input id="name" type="text" placeholder="Име">
+
+                <label for="email">Email</label>
+                <input id="email" type="email" placeholder="you@example.com">
+
+                <label for="message">Съобщение</label>
+                <textarea id="message" placeholder="Твоето съобщение..."></textarea>
+
+                <div style="margin-top:12px"><button class="btn" type="submit">Изпрати</button></div>
+            </form>
+        </div>
+    </main>
+
+    <footer class="site-footer">
+        <div class="footer-end">© 2025 Klasio</div>
+    </footer>
+
+    <script>
+        document.getElementById('contact-form')?.addEventListener('submit', function (e) {
+            e.preventDefault();
+            alert('Благодарим! Вашето съобщение е изпратено (демо).');
+            this.reset();
+        });
+    </script>
+</body>
+
+</html>

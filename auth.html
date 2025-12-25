@@ -14,33 +14,71 @@
             padding: 20px;
             display: grid;
             grid-template-columns: 1fr 380px;
-            gap: 28px
+            gap: 28px;
         }
 
         .auth-panel {
             background: var(--surface);
             padding: 28px;
-            border-radius: 14px
+            border-radius: 14px;
         }
 
         .auth-hero {
             display: flex;
             flex-direction: column;
-            gap: 12px
+            gap: 12px;
         }
 
-        .auth-form label {
+        /* Form stage: contains both forms and animates between them */
+        .form-stage {
+            overflow: hidden;
+            border-radius: 10px
+        }
+
+        .forms-inner {
+            display: flex;
+            width: 200%;
+            transition: transform .48s cubic-bezier(.2, .9, .2, 1)
+        }
+
+        .form-card {
+            width: 50%;
+            padding: 18px
+        }
+
+        .form-card label {
             display: block;
             margin-top: 10px;
             font-size: 14px
         }
 
-        .auth-form input {
+        .form-card input,
+        .form-card select {
             width: 100%;
             padding: 10px;
             border-radius: 8px;
             border: 1px solid #e6e9ee;
             margin-top: 6px
+        }
+
+        .auth-tabs {
+            display: flex;
+            gap: 8px;
+            margin-bottom: 12px
+        }
+
+        .tab-btn {
+            padding: 8px 12px;
+            border-radius: 8px;
+            background: transparent;
+            border: 1px solid rgba(15, 23, 36, 0.04);
+            cursor: pointer
+        }
+
+        .tab-btn.active {
+            background: var(--primary);
+            color: #fff;
+            box-shadow: 0 8px 20px rgba(37, 99, 235, 0.12)
         }
 
         .auth-actions {
@@ -49,10 +87,37 @@
             margin-top: 14px
         }
 
+        /* small animation utilities */
+        .fade-in {
+            animation: fadeIn .5s ease both
+        }
+
+        .slide-up {
+            transform: translateY(10px);
+            opacity: 0;
+            animation: slideUp .44s ease forwards
+        }
+
+        @keyframes slideUp {
+            to {
+                transform: none;
+                opacity: 1
+            }
+        }
+
         @media(max-width:880px) {
             .auth-wrap {
                 grid-template-columns: 1fr;
                 padding: 12px
+            }
+
+            .forms-inner {
+                flex-direction: column;
+                width: 100%
+            }
+
+            .form-card {
+                width: 100%
             }
         }
     </style>
@@ -72,18 +137,55 @@
                     <p>Влезте в профила си или се регистрирайте, за да използвате платформата.</p>
                 </div>
 
-                <form class="auth-form">
-                    <label for="email">Email</label>
-                    <input id="email" type="email" placeholder="you@example.com">
-
-                    <label for="password">Парола</label>
-                    <input id="password" type="password" placeholder="Парола">
-
-                    <div class="auth-actions">
-                        <button class="btn" type="button">Вход</button>
-                        <button class="btn ghost" type="button">Регистрация</button>
+                <div class="form-stage">
+                    <div class="auth-tabs">
+                        <button class="tab-btn active" data-mode="login">Вход</button>
+                        <button class="tab-btn" data-mode="register">Регистрация</button>
                     </div>
-                </form>
+
+                    <div class="forms-inner">
+                        <!-- Login card -->
+                        <div class="form-card fade-in" id="login-card">
+                            <form id="login-form">
+                                <label for="login-email">Email</label>
+                                <input id="login-email" type="email" placeholder="you@example.com" required>
+
+                                <label for="login-password">Парола</label>
+                                <div style="display:flex;gap:8px;align-items:center">
+                                    <input id="login-password" type="password" placeholder="Парола" required>
+                                    <button type="button" class="tab-btn" id="toggle-login-pwd">👁</button>
+                                </div>
+
+                                <div class="auth-actions">
+                                    <button class="btn" type="submit">Вход</button>
+                                    <a href="auth.html#register" class="tab-btn" data-mode="register">Регистрирай се</a>
+                                </div>
+                            </form>
+                        </div>
+
+                        <!-- Register card -->
+                        <div class="form-card fade-in" id="register-card">
+                            <form id="register-form">
+                                <label for="reg-name">Име</label>
+                                <input id="reg-name" type="text" placeholder="Име и фамилия" required>
+
+                                <label for="reg-email">Email</label>
+                                <input id="reg-email" type="email" placeholder="you@example.com" required>
+
+                                <label for="reg-password">Парола</label>
+                                <div style="display:flex;gap:8px;align-items:center">
+                                    <input id="reg-password" type="password" placeholder="Парола" required>
+                                    <button type="button" class="tab-btn" id="toggle-reg-pwd">👁</button>
+                                </div>
+
+                                <div class="auth-actions">
+                                    <button class="btn" type="submit">Създай акаунт</button>
+                                    <button type="button" class="tab-btn" data-mode="login">Имаш акаунт?</button>
+                                </div>
+                            </form>
+                        </div>
+                    </div>
+                </div>
             </section>
 
             <aside class="auth-panel">
@@ -99,6 +201,56 @@
     <footer class="site-footer">
         <div class="footer-end">© 2025 Klasio</div>
     </footer>
+    <script>
+        (function () {
+            const stage = document.querySelector('.forms-inner');
+            const tabs = document.querySelectorAll('.tab-btn[data-mode]');
+            const toggleLoginPwd = document.getElementById('toggle-login-pwd');
+            const toggleRegPwd = document.getElementById('toggle-reg-pwd');
+
+            function setMode(mode) {
+                if (!stage) return;
+                if (mode === 'register') {
+                    stage.style.transform = 'translateX(-50%)';
+                } else {
+                    stage.style.transform = 'translateX(0)';
+                }
+                tabs.forEach(t => t.classList.toggle('active', t.dataset.mode === mode));
+            }
+
+            tabs.forEach(t => t.addEventListener('click', () => setMode(t.dataset.mode)));
+
+            // handle hash link to open register
+            if (location.hash === '#register') setMode('register');
+
+            // show/hide password
+            function togglePwd(inputId) {
+                const input = document.getElementById(inputId);
+                if (!input) return;
+                input.type = input.type === 'password' ? 'text' : 'password';
+            }
+            toggleLoginPwd?.addEventListener('click', () => togglePwd('login-password'));
+            toggleRegPwd?.addEventListener('click', () => togglePwd('reg-password'));
+
+            // simple form handlers
+            document.getElementById('login-form')?.addEventListener('submit', function (e) {
+                e.preventDefault();
+                const email = this.querySelector('#login-email').value.trim();
+                const pass = this.querySelector('#login-password').value.trim();
+                if (!email || !pass) { alert('Попълнете email и парола'); return; }
+                alert('Вход (демо): ' + email);
+            });
+
+            document.getElementById('register-form')?.addEventListener('submit', function (e) {
+                e.preventDefault();
+                const name = this.querySelector('#reg-name').value.trim();
+                const email = this.querySelector('#reg-email').value.trim();
+                const pass = this.querySelector('#reg-password').value.trim();
+                if (!name || !email || !pass) { alert('Попълнете всички полета'); return; }
+                alert('Регистрация (демо): ' + name + ' — ' + email);
+            });
+        })();
+    </script>
 </body>
 
 </html>

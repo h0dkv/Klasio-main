@@ -203,6 +203,12 @@ body {
   align-items: flex-start
 }
 
+.footer-col .logo {
+  color: #e6eefc;
+  font-size: 22px;
+  margin-bottom: 12px
+}
+
 .footer-col {
   max-width: 320px
 }
