@@ -1,0 +1,104 @@
+<!DOCTYPE html>
+<html lang="bg">
+
+<head>
+    <meta charset="utf-8">
+    <meta name="viewport" content="width=device-width,initial-scale=1">
+    <title>Вход — Klasio</title>
+    <link href="https://fonts.googleapis.com/css2?family=Inter:wght@300;400;600;700&display=swap" rel="stylesheet">
+    <link rel="stylesheet" href="css/style.css">
+    <style>
+        .auth-wrap {
+            max-width: 920px;
+            margin: 60px auto;
+            padding: 20px;
+            display: grid;
+            grid-template-columns: 1fr 380px;
+            gap: 28px
+        }
+
+        .auth-panel {
+            background: var(--surface);
+            padding: 28px;
+            border-radius: 14px
+        }
+
+        .auth-hero {
+            display: flex;
+            flex-direction: column;
+            gap: 12px
+        }
+
+        .auth-form label {
+            display: block;
+            margin-top: 10px;
+            font-size: 14px
+        }
+
+        .auth-form input {
+            width: 100%;
+            padding: 10px;
+            border-radius: 8px;
+            border: 1px solid #e6e9ee;
+            margin-top: 6px
+        }
+
+        .auth-actions {
+            display: flex;
+            gap: 10px;
+            margin-top: 14px
+        }
+
+        @media(max-width:880px) {
+            .auth-wrap {
+                grid-template-columns: 1fr;
+                padding: 12px
+            }
+        }
+    </style>
+</head>
+
+<body>
+    <nav class="navbar">
+        <div class="nav-inner">
+            <div class="logo">Klasio</div>
+        </div>
+    </nav>
+    <main>
+        <div class="auth-wrap">
+            <section class="auth-panel">
+                <div class="auth-hero">
+                    <h1>Вход в Klasio</h1>
+                    <p>Влезте в профила си или се регистрирайте, за да използвате платформата.</p>
+                </div>
+
+                <form class="auth-form">
+                    <label for="email">Email</label>
+                    <input id="email" type="email" placeholder="you@example.com">
+
+                    <label for="password">Парола</label>
+                    <input id="password" type="password" placeholder="Парола">
+
+                    <div class="auth-actions">
+                        <button class="btn" type="button">Вход</button>
+                        <button class="btn ghost" type="button">Регистрация</button>
+                    </div>
+                </form>
+            </section>
+
+            <aside class="auth-panel">
+                <h3>Защо да изберете Klasio</h3>
+                <ul>
+                    <li>Интуитивни уроци</li>
+                    <li>Лесно управление на задания</li>
+                    <li>Проследяване на напредък</li>
+                </ul>
+            </aside>
+        </div>
+    </main>
+    <footer class="site-footer">
+        <div class="footer-end">© 2025 Klasio</div>
+    </footer>
+</body>
+
+</html>

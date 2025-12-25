@@ -20,4 +20,28 @@ document.addEventListener('DOMContentLoaded', function () {
             }
         });
     }
+
+    /* Reveal elements with stagger */
+    const reveals = Array.from(document.querySelectorAll('.reveal'));
+    reveals.forEach((el, i) => {
+        setTimeout(() => el.classList.add('in'), 80 * i + 120);
+    });
+
+    /* Nav links entrance */
+    const navLinks = Array.from(document.querySelectorAll('.nav-links a'));
+    navLinks.forEach((a, i) => {
+        setTimeout(() => a.classList.add('show'), 40 * i + 120);
+    });
+
+    /* Smooth scroll for internal links */
+    document.querySelectorAll('a[href^="#"]').forEach(a => {
+        a.addEventListener('click', function (ev) {
+            const href = this.getAttribute('href');
+            if (href.length > 1 && document.querySelector(href)) {
+                ev.preventDefault();
+                document.querySelector(href).scrollIntoView({ behavior: 'smooth', block: 'start' });
+                if (body.classList.contains('nav-open')) body.classList.remove('nav-open');
+            }
+        });
+    });
 });
