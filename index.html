@@ -1,45 +1,107 @@
 <!DOCTYPE html>
 <html lang="bg">
+
 <head>
 	<meta charset="UTF-8">
+	<meta name="viewport" content="width=device-width, initial-scale=1">
+	<meta name="description"
+		content="Klasio — модерна българска училищна платформа за ученици и учители: задачи, проверка и управление онлайн.">
 	<title>Klasio</title>
-	<meta name="viewport" content="width=device-width, initial-scale=1 .0">
+	<link href="https://fonts.googleapis.com/css2?family=Inter:wght@300;400;600;700&display=swap" rel="stylesheet">
 	<link rel="stylesheet" href="css/style.css">
 </head>
+
 <body>
 
-
 	<nav class="navbar">
-		<div class="logo">Klasio</div>
-		<ul>
-			<li><a href="#">Начало</a></li>
-			<li><a href="#">За платформата ни</a></li>
-			<li><a href="#">Контакт</a></li>
-			<li><a href="#" class="btn">Вход</a></li>
-		</ul>
+		<div class="nav-inner">
+			<div class="logo">Klasio</div>
+
+			<button class="nav-toggle" aria-label="Отвори меню">☰</button>
+
+			<div class="nav-links">
+				<ul>
+					<li><a href="#">Начало</a></li>
+					<li><a href="#features">Функции</a></li>
+					<li><a href="#about">За платформата</a></li>
+					<li><a href="#contact">Контакт</a></li>
+				</ul>
+			</div>
+
+			<div class="nav-actions">
+				<div class="nav-search">
+					<input type="search" id="site-search" placeholder="Търси учебни материали...">
+				</div>
+				<a href="#" class="btn">Вход</a>
+				<a href="#" class="btn ghost">Регистрация</a>
+			</div>
+		</div>
 	</nav>
 
-	<section class="hero">
-		<h1>Модерна училищна платформа</h1>
-		<p>Ученици и учители на едно място</p>
-		<a href="#" class="btn big">Започни сега</a>
-	</section>
+	<header class="hero">
+		<div class="hero-inner">
+			<div class="hero-copy">
+				<h1>Платформа за учебни задачи и управление</h1>
+				<p>Свързваме ученици и учители с лесни инструменти за задания, проверка и комуникация.</p>
+				<p class="hero-cta">
+					<a href="#" class="btn big">Започни безплатно</a>
+					<a href="#features" class="btn outline">Разгледай функции</a>
+				</p>
+			</div>
+			<div class="hero-visual" aria-hidden="true">
+				<div class="visual-card">Учебна работна област — визуализация</div>
+			</div>
+		</div>
+	</header>
 
-	<section class="features">
-		<div class="card">
-			<h3>Задачи</h3>
-			<p>Лесно управление на домашни и упражнения</p>
+	<main>
+		<section id="features" class="features">
+			<div class="card">
+				<div class="card-icon">📚</div>
+				<h3>Задачи</h3>
+				<p>Управление на домашни, срокове и автоматични тестове.</p>
+			</div>
+			<div class="card">
+				<div class="card-icon">👩‍🏫</div>
+				<h3>За учители</h3>
+				<p>Създавайте задания, проследявайте напредъка и оценявайте лесно.</p>
+			</div>
+			<div class="card">
+				<div class="card-icon">👨‍🎓</div>
+				<h3>За ученици</h3>
+				<p>Подаване на решения, следене на срокове и обратна връзка.</p>
+			</div>
+		</section>
+
+		<section id="about" class="how">
+			<h2>Как работи</h2>
+			<p>Интуитивен интерфейс, бързо създаване на задания и ясни отчети за напредъка.</p>
+		</section>
+	</main>
+
+	<footer class="site-footer">
+		<div class="footer-inner">
+			<div class="footer-col">
+				<div class="logo">Klasio</div>
+				<p>Модерна училищна платформа за България.</p>
+			</div>
+			<div class="footer-col">
+				<h4>Бързи връзки</h4>
+				<ul>
+					<li><a href="#features">Функции</a></li>
+					<li><a href="#about">За нас</a></li>
+					<li><a href="#contact">Поддръжка</a></li>
+				</ul>
+			</div>
+			<div class="footer-col">
+				<h4>Контакт</h4>
+				<p>hello@klasio.bg</p>
+			</div>
 		</div>
-		<div class="card">
-			<h3>Учители</h3>
-			<p>Създаване и проверка на задачи</p>
-		</div>
-		<div class="card">
-			<h3>Ученици</h3>
-			<p>Предаване на решения онлайн</p>
-		</div>
-	</section>
+		<div class="footer-end">© 2025 Klasio — Всички права запазени</div>
+	</footer>
 
 	<script src="js/main.js"></script>
 </body>
+
 </html>
