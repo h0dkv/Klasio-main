@@ -2,30 +2,29 @@
 <html lang="bg">
 <head>
   <meta charset="UTF-8">
-  <title>Klasio – Профил</title>
+  <title>Klasio – Dashboard</title>
+  <link rel="stylesheet" href="css/style.css">
 </head>
 <body>
-  <h1>Добре дошъл в Klasio</h1>
-  <p id="user-email"></p>
 
-  <button id="logout">Изход</button>
+<nav class="navbar">
+  <div class="nav-inner">
+    <div class="logo">Klasio</div>
+    <button id="logoutBtn" class="tab-btn">Изход</button>
+  </div>
+</nav>
 
-  <script type="module">
-    import { auth } from "./js/firebase-init.js";
-    import { onAuthStateChanged, signOut } 
-      from "https://www.gstatic.com/firebasejs/10.7.1/firebase-auth.js";
+<main style="padding:40px">
+  <h1>Dashboard</h1>
+  <p>Добре дошъл, <strong id="user-name"></strong></p>
 
-    onAuthStateChanged(auth, (user) => {
-      if (!user) {
-        window.location.href = "auth.html";
-      } else {
-        document.getElementById("user-email").textContent = user.email;
-      }
-    });
+  <div class="auth-panel">
+  <a class="btn" href="profile.html">Моят профил</a>
+  <a class="btn" href="courses.html">Курсове</a>
+</div>
+</main>
 
-    document.getElementById("logout").addEventListener("click", () => {
-      signOut(auth);
-    });
-  </script>
+<script type="module" src="js/guard.js"></script>
+<script type="module" src="js/dashboard.js"></script>
 </body>
 </html>

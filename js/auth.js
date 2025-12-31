@@ -29,16 +29,16 @@ document.getElementById("login-form")?.addEventListener("submit", async (e) => {
 document.getElementById("register-form")?.addEventListener("submit", async (e) => {
   e.preventDefault();
 
-  const name = reg-name.value.trim();
-  const email = reg-email.value.trim();
-  const password = reg-password.value.trim();
+  const name = document.getElementById("reg-name").value.trim();
+  const email = document.getElementById("reg-email").value.trim();
+  const password = document.getElementById("reg-password").value.trim();
 
   try {
     const userCred = await createUserWithEmailAndPassword(auth, email, password);
 
     await setDoc(doc(db, "users", userCred.user.uid), {
-      name,
-      email,
+      name: name,
+      email: email,
       createdAt: new Date()
     });
 
@@ -48,9 +48,20 @@ document.getElementById("register-form")?.addEventListener("submit", async (e) =
   }
 });
 
+
 /* ===== CHECK LOGIN ===== */
 onAuthStateChanged(auth, (user) => {
   if (user) {
     console.log("Логнат:", user.email);
   }
 });
+
+import { onAuthStateChanged } from
+  "https://www.gstatic.com/firebasejs/10.7.1/firebase-auth.js";
+
+onAuthStateChanged(auth, (user) => {
+  if (user) {
+    window.location.href = "dashboard.html";
+  }
+});
+

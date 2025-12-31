@@ -1,0 +1,49 @@
+<!DOCTYPE html>
+<html lang="bg">
+<head>
+  <meta charset="UTF-8">
+  <title>Klasio – Курсове</title>
+  <link rel="stylesheet" href="css/style.css">
+</head>
+<body>
+
+<nav class="navbar">
+  <div class="nav-inner">
+    <div class="logo">Klasio</div>
+    <a href="dashboard.html" class="tab-btn">Dashboard</a>
+  </div>
+</nav>
+
+<main style="max-width:1000px;margin:40px auto;padding:20px">
+  <h1>Курсове</h1>
+
+  <div id="courses-list" style="display:grid;gap:16px"></div>
+</main>
+
+<script type="module" src="js/guard.js"></script>
+<script type="module">
+  import { db } from "./js/firebase-init.js";
+  import { collection, getDocs } from
+    "https://www.gstatic.com/firebasejs/10.7.1/firebase-firestore.js";
+
+  const list = document.getElementById("courses-list");
+
+  const snap = await getDocs(collection(db, "courses"));
+
+  if (snap.empty) {
+    list.innerHTML = "<p>Все още няма курсове.</p>";
+  } else {
+    snap.forEach(doc => {
+      const course = doc.data();
+      list.innerHTML += `
+        <div class="auth-panel">
+          <h3>${course.title}</h3>
+          <p>${course.description}</p>
+        </div>
+      `;
+    });
+  }
+</script>
+
+</body>
+</html>

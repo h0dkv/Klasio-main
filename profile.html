@@ -1,0 +1,56 @@
+<!DOCTYPE html>
+<html lang="bg">
+<head>
+  <meta charset="UTF-8">
+  <title>Klasio – Профил</title>
+  <link rel="stylesheet" href="css/style.css">
+</head>
+<body>
+
+<nav class="navbar">
+  <div class="nav-inner">
+    <div class="logo">Klasio</div>
+    <a href="dashboard.html" class="tab-btn">Dashboard</a>
+  </div>
+</nav>
+
+<main style="max-width:800px;margin:40px auto;padding:20px">
+  <h1>Моят профил</h1>
+
+  <div class="auth-panel">
+    <p><strong>Име:</strong> <span id="user-name">...</span></p>
+    <p><strong>Email:</strong> <span id="user-email">...</span></p>
+
+    <button id="logoutBtn" class="btn" style="margin-top:20px">Изход</button>
+  </div>
+</main>
+
+<script type="module" src="js/guard.js"></script>
+<script type="module">
+  import { auth, db } from "./js/firebase-init.js";
+  import { signOut } from "https://www.gstatic.com/firebasejs/10.7.1/firebase-auth.js";
+  import { doc, getDoc } from "https://www.gstatic.com/firebasejs/10.7.1/firebase-firestore.js";
+
+  const nameEl = document.getElementById("user-name");
+  const emailEl = document.getElementById("user-email");
+  const logoutBtn = document.getElementById("logoutBtn");
+
+  auth.onAuthStateChanged(async (user) => {
+    if (user) {
+      emailEl.textContent = user.email;
+
+      const snap = await getDoc(doc(db, "users", user.uid));
+      if (snap.exists()) {
+        nameEl.textContent = snap.data().name;
+      }
+    }
+  });
+
+  logoutBtn.addEventListener("click", async () => {
+    await signOut(auth);
+    window.location.href = "auth.html";
+  });
+</script>
+
+</body>
+</html>
