@@ -238,7 +238,6 @@
                 const email = this.querySelector('#login-email').value.trim();
                 const pass = this.querySelector('#login-password').value.trim();
                 if (!email || !pass) { alert('Попълнете email и парола'); return; }
-                alert('Вход (демо): ' + email);
             });
 
             document.getElementById('register-form')?.addEventListener('submit', function (e) {
@@ -247,10 +246,12 @@
                 const email = this.querySelector('#reg-email').value.trim();
                 const pass = this.querySelector('#reg-password').value.trim();
                 if (!name || !email || !pass) { alert('Попълнете всички полета'); return; }
-                alert('Регистрация (демо): ' + name + ' — ' + email);
             });
         })();
     </script>
+    <script type="module" src="js/firebase-init.js"></script>
+    <script type="module" src="js/auth.js"></script>
+    <script src="js/main.js"></script>
 </body>
 
 </html>
