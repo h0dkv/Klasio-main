@@ -14,11 +14,12 @@ import {
 document.getElementById("login-form")?.addEventListener("submit", async (e) => {
   e.preventDefault();
 
-  const email = login-email.value.trim();
-  const password = login-password.value.trim();
+  const email = login - email.value.trim();
+  const password = login - password.value.trim();
 
   try {
     await signInWithEmailAndPassword(auth, email, password);
+    window.location.replace("dashboard.html");
     alert("Успешен вход!");
   } catch (err) {
     alert(err.message);
@@ -41,8 +42,7 @@ document.getElementById("register-form")?.addEventListener("submit", async (e) =
       email: email,
       createdAt: new Date()
     });
-
-    alert("Регистрацията е успешна!");
+    window.location.replace("dashboard.html");
   } catch (err) {
     alert(err.message);
   }
