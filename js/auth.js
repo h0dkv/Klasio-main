@@ -56,3 +56,14 @@ onAuthStateChanged(auth, (user) => {
   }
 });
 
+await setDoc(doc(db, "users", userCred.user.uid), {
+  name,
+  email,
+  role: "student",
+  createdAt: new Date()
+});
+
+if (userData.role !== "teacher") {
+  document.getElementById("addCourseBtn")?.remove();
+}
+
